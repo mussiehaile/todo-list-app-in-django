@@ -14,13 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from tasks.views import task_list,create_task,update_task,delete_task
+from django.urls import path,include
+# from tasks.views import task_list,create_task,update_task,delete_task,register_user
+from djoser import serializers as djoser_serialiser
+from djoser.views import UserViewSet
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('api/tasks',task_list, name = 'task_list'),
-    path('api/tasks/create',create_task, name = 'create_task'),
-    path('api/tasks/<int:pk>',update_task, name='update_task'),
-    path('api/tasks/<int:pk>/delete', delete_task, name='delete_task')
+    # path('api/tasks',task_list, name = 'task_list'),
+    # path('api/tasks/create',create_task, name = 'create_task'),
+    # path('api/tasks/<int:pk>',update_task, name='update_task'),
+    # path('api/tasks/<int:pk>/delete', delete_task, name='delete_task'),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.jwt')),
+    path('auth/', include('accounts.urls')),
 ]
