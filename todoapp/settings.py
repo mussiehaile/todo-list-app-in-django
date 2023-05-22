@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 
 
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -132,10 +134,6 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'djoser.backends.jwt.JWTBackend',
-]
 
 # Djoser settings
 DJOSER = {
@@ -156,3 +154,24 @@ DJOSER = {
 }
 
 
+AUTH_USER_MODEL = 'accounts.Account'  # Replace 'yourapp' with your app name
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES' :
+        ['rest_framework.permissions.IsAuthenticated']
+    ,
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    
+}
+
+SIMPLE_JWT = {
+   'AUTH_HEADER_TYPES': ('JWT',),
+}
+# AUTHENTICATION_BACKENDS = [
+#     'django.contrib.auth.backends.ModelBackend',
+#     'djoser.backends.jwt.JWTBackend',
+# ]
+
+"django.contrib.auth.get_user_model()"

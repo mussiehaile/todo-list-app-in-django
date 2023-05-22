@@ -1,16 +1,11 @@
-
 from rest_framework import serializers
 from .models import Account
-# from .models import Tasks
-from djoser.serializers import UserCreateSerializer
+from djoser.serializers import UserCreateSerializer as BaseUserRegistrationSerialiser
 
 
-class CustomUserSerialiser(UserCreateSerializer):
-    class Meta(UserCreateSerializer.Meta):
-        fields = ('id', 'username', 'password','email')
-        
-        
-
+class CustomUserSerializer(BaseUserRegistrationSerialiser):
+    class Meta(BaseUserRegistrationSerialiser.Meta):
+        fields = ('id', 'username', 'password', 'email','age')
 
 
 class AccountSerializer(serializers.ModelSerializer):
